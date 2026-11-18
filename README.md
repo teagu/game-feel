@@ -10,22 +10,22 @@ Por **Thiago Cortez**, co-fundador da Mango Salad Games e presidente da ACJOGOS-
 
 ## Mini-jogos
 
-1. **Os 3 blocos**: controle em tempo real, espaço simulado e polish
-2. **Laboratório de latência**: atraso de input, FPS e continuidade
-3. **Laboratório ADSR**: ataque, decaimento, sustentação e liberação do movimento
-4. **Sensibilidade**: input × resposta
-5. **Laboratório do pulo**: gravidade na queda, pulo variável, coyote time
-6. **Contexto e colisão**: espaçamento, corredor e tipos de colisão
-7. **Polish & metáfora**: um breakout com 8 efeitos e 4 metáforas
-8. **Regras dão sentido**: o mesmo movimento com regras diferentes
+1. **Building blocks**: real-time control, simulated space e polish
+2. **Input lag e frame rate**: latência, FPS e hitches
+3. **Laboratório ADSR**: attack, decay, sustain e release do movimento
+4. **Input × response**: sensitivity do input e da response
+5. **Laboratório do pulo**: fall gravity, variable jump height, coyote time + jump buffer
+6. **Context e collision**: obstacle spacing, largura do corredor e collision response
+7. **Polish e metaphor**: um breakout com 8 efeitos e 4 metáforas
+8. **Rules e significado**: o mesmo movimento com regras diferentes
 
 ## Controles
 
 | Tecla | Ação |
 |---|---|
-| → · Espaço · PageDown | avançar |
+| → · Espaço · PageDown · clique na tela | avançar |
 | ← · PageUp | voltar |
-| Enter · clique | jogar o mini-jogo do slide |
+| Enter · clique no jogo | jogar o mini-jogo do slide |
 | Esc · Tab | voltar aos slides |
 | 1–9 · 0 | opções do mini-jogo |
 | N | notas do apresentador |

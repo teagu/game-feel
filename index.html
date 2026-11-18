@@ -78,7 +78,11 @@ ul.px li::before{content:"";position:absolute;left:4px;top:13px;width:12px;heigh
 #notes{position:fixed;left:0;right:0;bottom:0;max-height:40vh;overflow:auto;background:rgba(14,15,24,.96);
   border-top:4px solid var(--yellow);padding:14px 26px 18px;font-size:26px;line-height:1.2;display:none;z-index:20}
 #notes.show{display:block}
-#notes .nh{font-family:'Press Start 2P',monospace;font-size:12px;color:var(--yellow);margin-bottom:8px}
+#notes .nh{position:sticky;top:-14px;display:flex;align-items:center;gap:14px;font-family:'Press Start 2P',monospace;font-size:12px;color:var(--yellow);
+  background:var(--ink);padding:6px 0 8px;margin:-6px 0 2px}
+#notes .nclose{margin-left:auto;flex:none;font-family:'Press Start 2P',monospace;font-size:11px;background:var(--dgray);color:var(--white);border:none;
+  padding:8px 11px;cursor:pointer;box-shadow:0 0 0 2px var(--gray)}
+#notes .nclose:hover{background:var(--blue)}
 #help{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(14,15,24,.88);z-index:30}
 #help.show{display:flex}
 #help .box{max-width:760px}
@@ -196,7 +200,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:22px;background:var(--yell
 .seven{display:flex;flex-direction:column;gap:12px;margin-top:8px}
 .seven div{font-size:32px;display:flex;align-items:center}
 .princ{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 22px;margin-top:6px}
-.princ .box{padding:14px 16px;min-height:230px}
+.princ .box{padding:14px 16px;min-height:190px}
 .princ b{display:block;font-family:'Press Start 2P',monospace;font-weight:normal;font-size:12px;line-height:1.45;color:var(--cyan);margin:12px 0 8px}
 .princ p{font-size:27px;line-height:1.06}
 .princ .box.y{grid-column:span 2}
@@ -246,6 +250,9 @@ input[type=range]::-moz-range-thumb{width:12px;height:22px;background:var(--yell
 #qrslot.hasqr .qr{display:flex}
 #qrslot.hasqr .qrfallback{display:none!important}
 
+.guide{position:absolute;left:56px;right:56px;bottom:52px;display:flex;align-items:center;gap:16px;padding:12px 18px;background:var(--ink);box-shadow:0 0 0 3px var(--gray);font-size:29px;line-height:1.1;color:var(--white)}
+.guide b{flex:none;font-family:'Press Start 2P',monospace;font-weight:normal;font-size:10px;letter-spacing:1px;color:var(--night);background:var(--yellow);padding:7px 8px}
+
 </style>
 </head>
 <body>
@@ -265,7 +272,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:22px;background:var(--yell
     <p class="tiny muted">Thiago Cortez · Mango Salad Games</p>
   </div>
   <div class="ground"></div>
-  <aside class="notes">Boas-vindas. A palestra tem 40 minutos e 8 mini-jogos ao vivo — cada conceito do livro vira algo que dá para sentir na mão. Atalhos: → avança, Enter joga, Esc solta o jogo, N mostra estas notas, P abre a janela do apresentador (notas, cronômetro e próximo slide) e T liga o cronômetro.</aside>
+  <aside class="notes">Boas-vindas. A palestra tem 40 minutos e 8 mini-jogos ao vivo — cada conceito do livro vira algo que dá para sentir na mão. Atalhos: → ou clique na tela avança, Enter joga, Esc solta o jogo, N mostra estas notas, P abre a janela do apresentador (notas, cronômetro e próximo slide) e T liga o cronômetro.</aside>
 </section>
 
 <section class="slide" data-end="1:10" data-world="START">
@@ -292,182 +299,182 @@ input[type=range]::-moz-range-thumb{width:12px;height:22px;background:var(--yell
 </section>
 
 <section class="slide" data-end="2:10" data-world="START">
-  <h2><small>PONTO DE PARTIDA</small>Todo jogador sente. Quase ninguém sabe explicar.</h2>
+  <h2><small>INTRODUÇÃO</small>Do adjetivo ao parâmetro</h2>
   <div class="row" style="align-items:center;gap:40px">
     <div class="col">
-      <p>Como os jogadores descrevem um jogo:</p>
       <div class="words">
-        <span style="--c:var(--sky)">"flutuante"</span>
-        <span style="--c:#ff6b7f">"duro"</span>
-        <span style="--c:var(--lime)">"responsivo"</span>
-        <span style="--c:var(--orange)">"pesado"</span>
-        <span style="--c:var(--cyan)">"solto"</span>
-        <span style="--c:var(--yellow)">"firme"</span>
-        <span style="--c:var(--lgray)">"travado"</span>
-        <span style="--c:var(--white)">"escorregadio"</span>
+        <span style="--c:var(--sky)">"floaty"</span>
+        <span style="--c:#ff6b7f">"stiff"</span>
+        <span style="--c:var(--lime)">"responsive"</span>
+        <span style="--c:var(--orange)">"heavy"</span>
+        <span style="--c:var(--cyan)">"loose"</span>
+        <span style="--c:var(--yellow)">"tight"</span>
+        <span style="--c:var(--lgray)">"sluggish"</span>
+        <span style="--c:var(--white)">"slippery"</span>
       </div>
-      <p class="small muted" style="margin-top:26px">Palavras vagas, mas todo mundo entende: todas falam de como o jogo responde quando você aperta o botão.</p>
     </div>
     <div style="width:430px">
       <div class="box y">
-        <p>Todas falam da mesma coisa: <span class="y">a sensação de controlar</span>.</p>
-        <p style="margin-top:16px">Hoje: o que é, como <span class="c">medir</span> e como <span class="l">afinar</span> — com 8 mini-jogos.</p>
+        <p><span class="y">definição</span></p>
+        <p style="margin-top:12px"><span class="c">métricas</span></p>
+        <p style="margin-top:12px"><span class="l">tuning</span></p>
+        <p class="small muted" style="margin-top:22px">8 mini-jogos</p>
       </div>
     </div>
   </div>
-  <aside class="notes">Abertura direta. Swink observa que os jogadores descrevem o feel com palavras vagas como "flutuante", "solto", "firme" e "responsivo" — e mesmo assim todos se entendem. A meta é trocar essas palavras por conceitos e números que dá para ajustar. Combine com a plateia: nos mini-jogos, Enter joga e Esc volta aos slides.</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>Jogador fala em adjetivos; designer precisa de parâmetros que dá para medir.</span></div>
+  <aside class="notes">Abertura. Swink observa que os jogadores descrevem o feel com adjetivos vagos — floaty, stiff, responsive, heavy, loose, tight, sluggish, slippery (flutuante, duro, responsivo, pesado, solto, firme, travado, escorregadio) — e mesmo assim todo mundo se entende: todos descrevem como o jogo responde ao input. A meta da palestra é trocar adjetivo por parâmetro: valores que dá para medir e tunar. Roteiro: definição → métricas → tuning, com 8 mini-jogos. Combine com a plateia: nos mini-jogos, Enter joga e Esc volta aos slides.</aside>
 </section>
 
 <section class="slide" data-end="4:10" data-world="1">
   <h2><small>MUNDO 1 · DEFINIÇÃO</small>O que é game feel?</h2>
-  <p class="quote" style="font-size:36px">A sensação tátil e cinestésica de manipular um objeto virtual. É a sensação de controle em um jogo.</p>
-  <p class="src" style="margin-top:4px">— Steve Swink. Uma arte invisível: quando funciona, ninguém percebe.</p>
-  <div class="row" style="gap:22px;margin-top:22px">
-    <div class="col box s"><h3><span class="spr" data-s="controller" data-k="3"></span> CONTROLE EM TEMPO REAL</h3><p class="small">Fluxo contínuo de comando: é <span class="y">dirigir um carro</span>, não conversar por turnos.</p></div>
-    <div class="col box l"><h3><span class="spr" data-s="flag" data-k="3"></span> ESPAÇO SIMULADO</h3><p class="small">Colisão + level design, percebidos <span class="y">ativamente</span>. Sem espaço, não se sente movimento.</p></div>
-    <div class="col box o"><h3><span class="spr" data-s="sparkle" data-k="4"></span> POLISH</h3><p class="small">Efeitos que realçam a interação <span class="y">sem mudar a simulação</span>.</p></div>
+  <p class="quote" style="font-size:44px">A sensação tátil e cinestésica de manipular um objeto virtual.</p>
+  <p class="src" style="margin-top:8px">— Steve Swink</p>
+  <div class="row" style="gap:22px;margin-top:56px">
+    <div class="col box s"><h3><span class="spr" data-s="controller" data-k="3"></span> REAL-TIME CONTROL</h3><p class="small">controle contínuo, momento a momento</p></div>
+    <div class="col box l"><h3><span class="spr" data-s="flag" data-k="3"></span> SIMULATED SPACE</h3><p class="small">collision + level design</p></div>
+    <div class="col box o"><h3><span class="spr" data-s="sparkle" data-k="4"></span> POLISH</h3><p class="small">camada de feedback sobre a simulação</p></div>
   </div>
-  <div class="box y dark" style="margin-top:26px">
-    <p class="center" style="font-size:32px">Game feel = <span class="s">controle em tempo real</span> de objetos virtuais num <span class="l">espaço simulado</span>, com interações enfatizadas por <span class="o">polish</span>.</p>
-  </div>
-  <aside class="notes">Swink perguntou a 10 designers o que é game feel e ouviu 10 respostas — controles intuitivos, impacto e timing, imersão, polimento — todas facetas do mesmo fenômeno. Os três blocos: controle em tempo real (dirigir, não conversar), espaço simulado (sem ele, uma bola num campo branco não parece se mover) e polish (Street Fighter II sem animação vira "caixas lutando"). Junte os três e você tem a definição de trabalho do livro. O próximo jogo mostra cada combinação — o diagrama de Venn está no painel.</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>Game feel só aparece com os 3 blocos juntos: control, space e polish.</span></div>
+  <aside class="notes">Swink perguntou a 10 designers o que é game feel e ouviu 10 respostas — controles intuitivos, impacto e timing, imersão, polish — todas facetas do mesmo fenômeno. Definição completa: "a sensação tátil e cinestésica de manipular um objeto virtual; a sensação de controle num jogo". É uma arte invisível: quando funciona, ninguém percebe. Os três building blocks: real-time control (fluxo contínuo de comando — dirigir um carro, não conversar por turnos), simulated space (collision + level design percebidos ativamente; sem espaço, uma bola num campo branco não parece se mover) e polish (feedback que enfatiza a interação sem mudar a simulação; Street Fighter II sem animação vira "caixas lutando"). Definição de trabalho: game feel = real-time control de objetos virtuais num simulated space, com interações enfatizadas por polish. O próximo jogo mostra cada combinação — o diagrama de Venn está no painel.</aside>
 </section>
 
 <section class="slide gslide" data-end="7:00" data-world="1">
-  <h2>JOGO 1/8 · Os 3 blocos <span class="tag">CAP. 1</span></h2>
+  <h2>JOGO 1/8 · Building blocks <span class="tag">CAP. 1</span></h2>
   <div class="game" data-game="blocos"></div>
-  <aside class="notes">Comece só com controle: a câmera segue o Pixo num campo vazio — dá para dizer se ele anda? Ligue o espaço (2): referência e colisão. Ligue o polish (3): poeira, squash, som e tremor. Desligue o controle (1): vira filme. O painel mostra a região do Venn — centro: Sonic, Mario 64; espaço + polish sem controle: Peggle e Starcraft (você dá ordens, não guia cada passo); só polish: Bejeweled, Civilization 4. Definição não é julgamento de valor.</aside>
+  <aside class="notes">Comece só com control: a câmera segue o Pixo num campo vazio — dá para dizer se ele anda? A velocidade no painel diz que sim. Ligue simulated space (2): referência e collision. Ligue polish (3): dust, squash &amp; stretch, SFX e screen shake. Desligue control (1): vira cutscene. O painel mostra a região do Venn — centro: Sonic, Mario 64; space + polish sem control: Peggle e Starcraft (você dá ordens, não guia cada passo); só polish: Bejeweled, Civilization 4. Definição não é julgamento de valor.</aside>
 </section>
 
 <section class="slide" data-end="9:00" data-world="2">
-  <h2><small>MUNDO 2 · PERCEPÇÃO · CAP. 2</small>Os números do controle em tempo real</h2>
+  <h2><small>MUNDO 2 · PERCEPÇÃO · CAP. 2</small>Latency budget</h2>
   <div class="row" style="gap:26px">
     <div class="col box s">
-      <h3>O JOGADOR · CICLO DE CORREÇÃO</h3>
-      <div class="pr"><span class="spr" data-s="eye" data-k="4"></span><span>Perceber</span><b>~100 ms</b></div>
-      <div class="pr"><span class="spr" data-s="bulb" data-k="4"></span><span>Pensar</span><b>~70 ms</b></div>
-      <div class="pr"><span class="spr" data-s="hand" data-k="4"></span><span>Agir</span><b>~70 ms</b></div>
-      <div class="pr tot"><span></span><span>Total</span><b>~240 ms</b></div>
-      <p class="tiny muted" style="margin-top:6px">≈ 4 microcorreções por segundo · Card, Moran & Newell (1983)</p>
+      <h3>JOGADOR · MODEL HUMAN PROCESSOR</h3>
+      <div class="pr"><span class="spr" data-s="eye" data-k="4"></span><span>Perceptual</span><b>~100 ms</b></div>
+      <div class="pr"><span class="spr" data-s="bulb" data-k="4"></span><span>Cognitive</span><b>~70 ms</b></div>
+      <div class="pr"><span class="spr" data-s="hand" data-k="4"></span><span>Motor</span><b>~70 ms</b></div>
+      <div class="pr tot"><span></span><span>Correction cycle</span><b>~240 ms</b></div>
+      <p class="tiny muted" style="margin-top:6px">Card, Moran &amp; Newell (1983)</p>
     </div>
     <div class="col box y">
-      <h3>O COMPUTADOR · 3 LIMIARES</h3>
-      <div class="pr"><span class="num">1</span><span>Movimento</span><b>10+ FPS</b></div>
-      <div class="pr"><span class="num">2</span><span>Resposta</span><b>&lt;100 ms</b></div>
-      <div class="pr"><span class="num">3</span><span>Continuidade</span><b>sempre</b></div>
-      <p class="tiny muted" style="margin-top:10px">Suave a partir de 20–30 FPS. Resposta é do input ao pixel, sem engasgos.</p>
+      <h3>MÁQUINA · 3 LIMIARES</h3>
+      <div class="pr"><span class="num">1</span><span>Frame rate</span><b>10+ FPS</b></div>
+      <div class="pr"><span class="num">2</span><span>Input lag</span><b>&lt;100 ms</b></div>
+      <div class="pr"><span class="num">3</span><span>Continuidade</span><b>sem hitches</b></div>
     </div>
   </div>
   <div class="gauge" style="margin-top:34px">
     <div style="flex:50;background:var(--lime)"><span>instantâneo</span></div>
-    <div style="flex:50;background:var(--green)"><span>firme</span></div>
+    <div style="flex:50;background:var(--green)"><span>tight</span></div>
     <div style="flex:100;background:var(--yellow)"><span>perceptível</span></div>
-    <div style="flex:40;background:var(--orange)"><span>lento</span></div>
+    <div style="flex:40;background:var(--orange)"><span>sluggish</span></div>
     <div style="flex:60;background:var(--red)"><span>quebrado</span></div>
   </div>
   <div class="gticks"><i style="left:0">0</i><i style="left:16.66%">50</i><i style="left:33.33%">100</i><i style="left:66.66%">200</i><i style="left:80%">240</i><i style="left:100%">300 ms</i></div>
-  <aside class="notes">Os três processadores do Model Human Processor somam uns 240 ms: é o ciclo em que fazemos microcorreções, como ao dirigir. Se ação e resposta caem no mesmo ciclo perceptual, sentimos causalidade. Por isso o computador precisa responder em menos de 100 ms: 50 parece instantâneo, 100 dá para notar mas ignorar, 200 é lento e acima de 240 o controle quebra — o jogador age antes de o jogo responder. Mick West: 50–100 ms soam "firmes"; só a pipeline a 60 FPS já custa uns 3 frames (50 ms).</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>Resposta abaixo de 100 ms cabe no ciclo do jogador: ele sente causa e efeito.</span></div>
+  <aside class="notes">Model Human Processor (Card, Moran &amp; Newell): perceptual ~100 ms + cognitive ~70 ms + motor ~70 ms ≈ 240 ms — o correction cycle, umas 4 microcorreções por segundo, como ao dirigir. Se ação e resposta caem no mesmo ciclo perceptual, sentimos causalidade. Do lado da máquina, 3 limiares: movimento a partir de ~10 FPS (suave em 20–30+), input lag abaixo de 100 ms (medido do input ao pixel) e continuidade, sem hitches. Na régua: 50 ms parece instantâneo, 100 dá para notar mas ignorar, 200 é sluggish e acima de 240 o controle quebra — o jogador age de novo antes de o jogo responder. Mick West: 50–100 ms soam "tight"; só a pipeline a 60 FPS já custa uns 3 frames (50 ms).</aside>
 </section>
 
 <section class="slide gslide" data-end="11:45" data-world="2">
-  <h2>JOGO 2/8 · Laboratório de latência <span class="tag">CAP. 2</span></h2>
+  <h2>JOGO 2/8 · Input lag e frame rate <span class="tag">CAP. 2</span></h2>
   <div class="game" data-game="lag"></div>
-  <aside class="notes">Chame um voluntário. Primeiro "IDEAL": siga o alvo, fácil. Depois 100 ms (quase ninguém nota), 200 ms (lento: começa a errar), 300 ms (quebrado: a pessoa passa do ponto, oscila). Repare nas teclas acendendo no painel antes do Pixo se mover. Depois teste 10 FPS e 5 FPS (fusão perceptual) e ligue os engasgos (continuidade).</aside>
+  <aside class="notes">Chame um voluntário. Primeiro IDEAL: siga o alvo, fácil. Depois 100 ms (quase ninguém nota), 200 ms (sluggish: começa a errar), 300 ms (quebrado: a pessoa faz overshoot e oscila). Repare no painel: o input acende antes do Pixo se mover. Depois teste 10 FPS e 5 FPS (fusão perceptual) e ligue os hitches (8) para quebrar a continuidade.</aside>
 </section>
 
 <section class="slide" data-end="13:15" data-world="3">
-  <h2><small>MUNDO 3 · CAP. 4–5</small>As 6 métricas do game feel</h2>
-  <p class="small" style="margin-bottom:18px">Mecânica = verbo (pular, mirar, acelerar): um ciclo completo de input → resposta → jogador. Para medir o feel de cada verbo:</p>
+  <h2><small>MUNDO 3 · CAP. 4–5</small>6 métricas</h2>
   <div class="metrics">
-    <div class="box s"><span class="spr" data-s="controller" data-k="4"></span><h3>INPUT</h3><p class="small">O dispositivo físico e quais entradas o jogo usa</p></div>
-    <div class="box l"><span class="spr" data-s="graph" data-k="5"></span><h3>RESPOSTA</h3><p class="small">Como o input vira movimento ao longo do tempo</p></div>
-    <div class="box c"><span class="spr" data-s="flag" data-k="4"></span><h3>CONTEXTO</h3><p class="small">Espaço simulado: colisão e level design</p></div>
-    <div class="box o"><span class="spr" data-s="sparkle" data-k="5"></span><h3>POLISH</h3><p class="small">Efeitos que vendem as propriedades físicas</p></div>
-    <div class="box p"><span class="spr" data-s="eye" data-k="4"></span><h3>METÁFORA</h3><p class="small">O que o objeto parece ser → o que esperamos dele</p></div>
-    <div class="box y"><span class="spr" data-s="coin" data-k="4"></span><h3>REGRAS</h3><p class="small">Metas e relações que dão significado às ações</p></div>
+    <div class="box s"><span class="spr" data-s="controller" data-k="4"></span><h3>INPUT</h3><p class="small">dispositivo · mapping</p></div>
+    <div class="box l"><span class="spr" data-s="graph" data-k="5"></span><h3>RESPONSE</h3><p class="small">input → movimento no tempo</p></div>
+    <div class="box c"><span class="spr" data-s="flag" data-k="4"></span><h3>CONTEXT</h3><p class="small">collision · level design</p></div>
+    <div class="box o"><span class="spr" data-s="sparkle" data-k="5"></span><h3>POLISH</h3><p class="small">VFX · SFX · animação · câmera</p></div>
+    <div class="box p"><span class="spr" data-s="eye" data-k="4"></span><h3>METAPHOR</h3><p class="small">representação · tratamento</p></div>
+    <div class="box y"><span class="spr" data-s="coin" data-k="4"></span><h3>RULES</h3><p class="small">metas · significado</p></div>
   </div>
-  <p class="small muted" style="margin-top:20px"><span class="tag">HARD</span> ms, frames, curvas &nbsp; <span class="tag">SOFT</span> sensação, diversão — as duas importam.</p>
-  <aside class="notes">Analisar um jogo inteiro é difícil: o livro quebra em mecânicas, verbo por verbo. Cada verbo é testado contra os limiares (10 FPS, 100 ms, fluxo contínuo). Clicar para mandar tropas no Starcraft é impulso, não fluxo. Derek Daniels (God of War): "o Mario pula como um campeão, mas é muito difícil fazer engenharia reversa do pulo dele". As seis métricas cobrem tudo o que o designer controla no ciclo — a paleta fica entre o computador, o mundo do jogo e a saída. Mick West grava cada botão e estado por frame num gráfico: métrica dura.</aside>
+  <p class="small muted" style="margin-top:20px"><span class="tag">HARD</span> ms · frames · curvas &nbsp; <span class="tag">SOFT</span> sensação · diversão</p>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>Analise um verbo por vez (pular, mirar, dirigir) passando pelas 6 métricas.</span></div>
+  <aside class="notes">Analisar um jogo inteiro é difícil: o livro quebra em mechanics, verbo por verbo (jump, aim, steer) — cada uma é um ciclo completo input → response → player. Cada verbo é testado contra os thresholds (10 FPS, 100 ms, fluxo contínuo); clicar para mandar tropas no Starcraft é impulso, não fluxo. Derek Daniels (God of War): o Mario pula como um campeão, mas é muito difícil fazer engenharia reversa do pulo dele. As seis métricas cobrem tudo o que o designer controla no ciclo: input (dispositivo físico e quais entradas o jogo usa), response (como o input vira movimento ao longo do tempo), context (collision e level design), polish (efeitos que vendem as propriedades físicas), metaphor (o que o objeto parece ser e o que esperamos dele) e rules (metas que dão significado às ações). Hard metrics: ms, frames, curvas — Mick West grava cada botão e estado por frame num gráfico. Soft metrics: sensação, diversão. As duas importam.</aside>
 </section>
 
 <section class="slide" data-end="15:00" data-world="3">
-  <h2><small>MÉTRICAS 1 E 2 · CAP. 6–7</small>Input e resposta</h2>
+  <h2><small>MÉTRICAS 1–2 · CAP. 6–7</small>Input e response</h2>
   <div class="row" style="gap:40px">
     <div class="col">
-      <h3>INPUT · SENSIBILIDADE</h3>
+      <h3>INPUT SENSITIVITY</h3>
       <div class="ladder" style="height:200px">
         <div><i style="height:30px"></i><b>BOTÃO</b><span>2 estados</span></div>
-        <div><i style="height:62px"></i><b>GATILHO</b><span>centenas</span></div>
+        <div><i style="height:62px"></i><b>GATILHO</b><span>1 eixo</span></div>
         <div><i style="height:94px"></i><b>ANALÓGICO</b><span>2 eixos</span></div>
         <div><i style="height:126px"></i><b>MOUSE</b><span>sem limite</span></div>
       </div>
-      <p class="small" style="margin-top:14px">No teclado dá para apertar <span class="y">esquerda e direita juntos</span>; no d-pad, não. Molas e materiais também mudam o feel.</p>
     </div>
     <div class="col">
-      <h3>RESPOSTA · ENVELOPE ADSR</h3>
+      <h3>RESPONSE · ADSR ENVELOPE</h3>
       <svg width="540" height="200" viewBox="0 0 560 210" font-family="'Press Start 2P',monospace" shape-rendering="crispEdges" style="display:block">
         <rect x="20" y="6" width="4" height="170" fill="#566c86"/><rect x="20" y="172" width="530" height="4" fill="#566c86"/>
         <polyline points="24,172 110,22 200,84 380,84 548,172" fill="none" stroke="#a7f070" stroke-width="6" shape-rendering="auto"/>
-        <g font-size="11" fill="#ffcd75" text-anchor="middle"><text x="64" y="200">ATAQUE</text><text x="160" y="200">DECAIM.</text><text x="290" y="200">SUSTENTAÇÃO</text><text x="470" y="200">LIBERAÇÃO</text></g>
+        <g font-size="11" fill="#ffcd75" text-anchor="middle"><text x="64" y="200">ATTACK</text><text x="160" y="200">DECAY</text><text x="290" y="200">SUSTAIN</text><text x="470" y="200">RELEASE</text></g>
       </svg>
       <div class="row" style="gap:14px;margin-top:10px">
         <div class="col box dark" style="padding:8px 10px"><svg width="180" height="44" viewBox="0 0 200 60" shape-rendering="crispEdges"><polyline points="4,56 4,8 196,8 196,56" fill="none" stroke="#ef7d57" stroke-width="5"/></svg><p class="tiny">Jumpman: liga/desliga</p></div>
         <div class="col box dark" style="padding:8px 10px"><svg width="180" height="44" viewBox="0 0 200 60"><polyline points="4,56 40,8 150,8 196,56" fill="none" stroke="#73eff7" stroke-width="5"/></svg><p class="tiny">Mario: acelera e escorrega</p></div>
       </div>
-      <p class="small" style="margin-top:10px">Ataque longo = <span class="o">solto</span> · curto = <span class="l">firme</span></p>
+      <p class="small" style="margin-top:10px">attack longo = <span class="o">loose</span> · curto = <span class="l">tight</span></p>
     </div>
   </div>
-  <aside class="notes">Input: dá para tocar Für Elise num piano de brinquedo, mas o potencial de um piano de cauda é outro. O designer quase nunca escolhe o dispositivo, mas sempre escolhe quais entradas usar e como combinam. Resposta: todo parâmetro modulado por input tem um envelope, como o volume de um violão (ataque, decaimento, sustentação, liberação) versus um órgão, que liga e desliga seco. O Jumpman do Donkey Kong é um órgão; o Mario acelera e desliza; o empuxo do Asteroids tem uns 3 segundos de ataque e o jogador adora. Mapeamentos: Quake (mouse → rotação direta), Halo Warthog (stick → taxa, o carro persegue a mira), Mario (tempo segurando → altura do pulo).</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>Input é a intenção do jogador; response é como ela vira movimento no tempo.</span></div>
+  <aside class="notes">Input: dá para tocar Für Elise num piano de brinquedo, mas o potencial de um piano de cauda é outro. A sensitivity cresce do botão (2 estados) ao gatilho (1 eixo, centenas de estados), ao analógico (2 eixos) e ao mouse (sem limite). O designer quase nunca escolhe o dispositivo, mas sempre escolhe quais entradas usar e como combinam — no teclado dá para apertar esquerda e direita juntos; no d-pad, não. Molas e materiais do controle também mudam o feel. Response: todo parâmetro modulado por input tem um envelope ADSR — attack, decay, sustain, release — como o volume de um violão, versus um órgão, que liga e desliga seco. O Jumpman do Donkey Kong é um órgão (on/off); o Mario acelera e escorrega; o thrust do Asteroids tem uns 3 segundos de attack e o jogador adora. Attack longo soa loose; curto soa tight. Mappings: Quake (mouse → rotação direta), Halo Warthog (stick → taxa, o carro persegue a mira), Mario (tempo segurando → altura do pulo).</aside>
 </section>
 
 <section class="slide gslide" data-end="17:45" data-world="3">
   <h2>JOGO 3/8 · Laboratório ADSR <span class="tag">CAP. 7</span></h2>
   <div class="game" data-game="adsr"></div>
-  <aside class="notes">O gráfico no topo é a métrica dura do Mick West: input (barra amarela) × velocidade (linha verde) no tempo. Desafio: parar dentro da zona marcada. Jumpman é preciso e duro; Mario é orgânico; o empuxo do Asteroids é solto e passa do ponto; o Dash mostra o decaimento. Pergunte: qual combina com um jogo de plataforma de precisão? E com um jogo de patinação?</aside>
+  <aside class="notes">O gráfico no topo é a hard metric do Mick West: input (barra amarela) × velocidade (linha verde) no tempo. Desafio: parar dentro da zona marcada. Jumpman é preciso e stiff; Mario é orgânico; o thrust do Asteroids é loose e faz overshoot; o Dash mostra o decay. Pergunte: qual combina com um platformer de precisão? E com um jogo de patinação?</aside>
 </section>
 
 <section class="slide gslide" data-end="20:00" data-world="3">
-  <h2>JOGO 4/8 · Sensibilidade <span class="tag">CAP. 7</span></h2>
+  <h2>JOGO 4/8 · Input × response <span class="tag">CAP. 7</span></h2>
   <div class="game" data-game="sens"></div>
-  <aside class="notes">Sensibilidade total = sensibilidade do input × da resposta. Mesmo objetivo, quatro feels. 1: rígido, linhas retas (Zelda NES, Pac-Man — às vezes é o que se quer). 2: botões somando forças, curvas orgânicas: o Mario tem input pobre mas resposta rica. 3: o mouse como cursor — preciso, fácil e sem peso. 4: chicotear o bloco com uma mola — difícil e gostoso. Olhe o rastro: linhas retas × curvas é o princípio do movimento orgânico.</aside>
+  <aside class="notes">Total sensitivity = input sensitivity × response sensitivity. Mesmo objetivo, quatro feels. 1: rígido, linhas retas (Zelda NES, Pac-Man — às vezes é o que se quer). 2: botões somando forças, curvas orgânicas: o Mario tem input pobre mas response rica. 3: mouse como cursor — preciso, fácil e sem peso. 4: chicotear o bloco com uma mola — difícil e gostoso. Olhe o rastro: linhas retas × curvas é o princípio do movimento orgânico.</aside>
 </section>
 
 <section class="slide" data-end="21:00" data-world="3">
-  <h2><small>ESTUDO DE CASO · CAP. 13</small>A anatomia do pulo de Super Mario Bros.</h2>
+  <h2><small>ESTUDO DE CASO · CAP. 13</small>Super Mario Bros.: o pulo</h2>
   <div class="row">
     <div class="col">
-      <h3>7 VALORES QUE DEFINEM O PULO</h3>
+      <h3>7 PARÂMETROS DO PULO</h3>
       <div class="seven">
-        <div><span class="num">1</span>Gravidade</div>
-        <div><span class="num">2</span>Força inicial do pulo</div>
-        <div><span class="num">3</span>Tempo mínimo segurando</div>
-        <div><span class="num">4</span>Tempo máximo segurando</div>
-        <div><span class="num">5</span>Velocidade reduzida ao soltar</div>
-        <div><span class="num">6</span>Gravidade na queda (~3×)</div>
-        <div><span class="num">7</span>Velocidade terminal</div>
+        <div><span class="num">1</span>Gravity</div>
+        <div><span class="num">2</span>Initial jump velocity</div>
+        <div><span class="num">3</span>Min hold time</div>
+        <div><span class="num">4</span>Max hold time</div>
+        <div><span class="num">5</span>Release velocity</div>
+        <div><span class="num">6</span>Fall gravity (~3×)</div>
+        <div><span class="num">7</span>Terminal velocity</div>
       </div>
     </div>
     <div class="col">
-      <div class="box o"><h3>POR QUE 3× NA QUEDA?</h3><p class="small">Sobe flutuando, desce rápido: menos tempo sem controle e mais sensação de <span class="y">peso</span>.</p></div>
-      <div class="box c" style="margin-top:24px"><h3>CONTEXTO CASADO</h3><p class="small">Pulo máximo ≈ 5 tiles; plataformas a <span class="y">~4 tiles</span>: você pousa na parte suave do arco. E o level é feito para correr: "a sorte favorece os ousados".</p></div>
+      <div class="box o"><h3>FALL GRAVITY 3×</h3><p class="small">sobe flutuando, desce rápido → <span class="y">peso</span></p></div>
+      <div class="box c" style="margin-top:24px"><h3>PULO × LEVEL METRICS</h3><p class="small">pulo máx. ≈ 5 tiles · plataformas ≈ <span class="y">4 tiles</span></p></div>
     </div>
   </div>
-  <aside class="notes">Swink reconstrói o Mario como um retângulo. Ao apertar, ganha velocidade para cima; ao soltar cedo, a velocidade cai para um valor fixo — por isso o final do arco é sempre igual. No ápice, a gravidade triplica. Se igualar a gravidade de subida e descida, o pulo parece longo e leve demais. Os inimigos andam mais ou menos na velocidade de caminhada do Mario.</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>O feel do pulo cabe em 7 números, e o level é desenhado em cima deles.</span></div>
+  <aside class="notes">Swink reconstrói o Mario como um retângulo. Ao apertar, ganha a initial jump velocity; entre o min e o max hold time, segurar sustenta a subida; ao soltar cedo, a velocidade cai para um valor fixo (release velocity) — por isso o final do arco é sempre igual. No apex, a gravidade triplica: sobe flutuando, desce rápido — menos tempo sem controle e mais sensação de peso. Se igualar a gravidade de subida e descida, o pulo parece longo e floaty demais. Level metrics casadas: pulo máximo ≈ 5 tiles e plataformas a ~4 tiles, então você pousa na parte suave do arco. O level é feito para correr — "a sorte favorece os ousados" — e os inimigos andam mais ou menos na velocidade de caminhada do Mario.</aside>
 </section>
 
 <section class="slide gslide" data-end="24:15" data-world="3">
   <h2>JOGO 5/8 · Laboratório do pulo <span class="tag">CAP. 13</span></h2>
   <div class="game" data-game="pulo"></div>
-  <aside class="notes">Comece no preset "Clássico". Mostre o arco desenhado: sobe devagar, desce rápido. Pule nas plataformas 2 a 6: a de 4 é a mais gostosa, a 5 é no limite, a 6 só por cima de outra. Toque rápido = pulo baixo. Agora ponha gravidade na queda em 1×: parece lua. Desligue o pulo variável. Por último desligue a tolerância (coyote time + buffer) e tente pular na beira do buraco — ligação com o princípio "resultados previsíveis".</aside>
+  <aside class="notes">Comece no preset CLÁSSICO. Mostre o arco desenhado: sobe devagar, desce rápido. Pule nas plataformas 2 a 6: a de 4 é a mais gostosa, a 5 é no limite, a 6 só por cima de outra. Tap = pulo baixo; hold = pulo alto. Agora ponha fall gravity em 1×: parece lua. Desligue o variable jump height. Por último desligue coyote time + jump buffer e tente pular na beira do buraco — ligação com o princípio "predictable results".</aside>
 </section>
 
 <section class="slide" data-end="25:15" data-world="3">
-  <h2><small>MÉTRICA 3 · CAP. 8</small>Contexto: restrições definem a sensação</h2>
+  <h2><small>MÉTRICA 3 · CAP. 8</small>Context: restrições definem o feel</h2>
   <div class="row">
     <div class="col">
-      <div class="box s"><h3>ALTO NÍVEL · ESPAÇO</h3><p class="small">Impressão de escala e velocidade. Aberto ou claustrofóbico?</p></div>
-      <div class="box l" style="margin-top:20px"><h3>MÉDIO NÍVEL · DESVIO</h3><p class="small">O "segundo conjunto de botões": velocidade do avatar × espaçamento dos obstáculos.</p></div>
-      <div class="box o" style="margin-top:20px"><h3>BAIXO NÍVEL · COLISÃO</h3><p class="small">Contato íntimo: jogos de corrida usam o "toboágua" (deslizar) em vez de grudar.</p></div>
+      <div class="box s"><h3>ALTO NÍVEL · ESPAÇO</h3><p class="small">escala · velocidade percebida</p></div>
+      <div class="box l" style="margin-top:20px"><h3>MÉDIO NÍVEL · NAVEGAÇÃO</h3><p class="small">avatar speed × obstacle spacing</p></div>
+      <div class="box o" style="margin-top:20px"><h3>BAIXO NÍVEL · COLLISION</h3><p class="small">collision response: slide &gt; stick</p></div>
     </div>
     <div style="width:400px" class="center">
       <svg width="300" height="270" viewBox="0 0 300 270" shape-rendering="crispEdges" font-family="'Press Start 2P',monospace" style="display:block;margin:0 auto"><rect x="16" y="0" width="138" height="238" fill="#94b0c2"/>
@@ -619,90 +626,92 @@ input[type=range]::-moz-range-thumb{width:12px;height:22px;background:var(--yell
 <rect x="243" y="26" width="12" height="2" fill="#f4f4f4" fill-opacity=".45"/>
 <rect x="243" y="39" width="12" height="12" fill="#73eff7"/>
 <rect x="243" y="39" width="12" height="2" fill="#f4f4f4" fill-opacity=".45"/>
-<text x="249.5" y="258" text-anchor="middle" font-size="11" fill="#ffcd75">MAGRO</text></svg>
-      <p class="small" style="margin-top:12px">Tetris 10 de largura × Tetris "magro". <span class="y">Mude o contexto, mude o jogo.</span></p>
+<text x="249.5" y="258" text-anchor="middle" font-size="11" fill="#ffcd75">3 × 24</text></svg>
+      <p class="small" style="margin-top:12px">Tetris: <span class="y">mesmas regras, outra largura</span></p>
     </div>
   </div>
-  <aside class="notes">Um Mario 64 num campo branco: o pulo triplo e o wall kick não significam nada sem parede. Objetos muito juntos geram ansiedade; muito separados, o mapeamento perde importância. Alexei Pajitnov escolheu 10 de largura: com 3, seria outro jogo. E colisão é feel: o "toboágua" nos jogos de corrida existe porque grudar na parede a 300 km/h seria horrível.</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>O mesmo controle muda de feel conforme o espaço em volta.</span></div>
+  <aside class="notes">High level: o espaço dá a impressão de escala e velocidade — aberto ou claustrofóbico? Um Mario 64 num campo branco: o triple jump e o wall kick não significam nada sem parede. Mid level: avatar speed × obstacle spacing é o "segundo conjunto de botões"; objetos muito juntos geram ansiedade, muito separados tiram a importância do mapping. Alexei Pajitnov escolheu um poço de 10 de largura: com 3, seria outro jogo. Low level: collision é contato íntimo, e é feel — jogos de corrida usam slide ("toboágua") em vez de grudar na parede, porque parar seco a 300 km/h seria horrível.</aside>
 </section>
 
 <section class="slide gslide" data-end="27:30" data-world="3">
-  <h2>JOGO 6/8 · Contexto e colisão <span class="tag">CAP. 8</span></h2>
+  <h2>JOGO 6/8 · Context e collision <span class="tag">CAP. 8</span></h2>
   <div class="game" data-game="contexto"></div>
-  <aside class="notes">O controle é o mesmo o tempo todo; só o contexto muda. Diminua o espaçamento (opressivo) e aumente (o controle quase não importa). Afine o corredor. Depois troque o tipo de colisão: toboágua (fluido), cola (frustrante), quica (caótico), explode (punitivo, tenso). Ajuste juntos velocidade do avatar e espaçamento — é aí que o feel é afinado de verdade.</aside>
+  <aside class="notes">O control é o mesmo o tempo todo; só o context muda. Diminua o obstacle spacing (opressivo) e aumente (o control quase não importa). Estreite o corredor. Depois troque o collision response: slide (fluido), stick (frustrante), bounce (caótico), explode (punitivo, tenso). Ajuste avatar speed e spacing juntos — é aí que o feel é tunado de verdade.</aside>
 </section>
 
 <section class="slide" data-end="29:00" data-world="3">
-  <h2><small>MÉTRICAS 4 E 5 · CAP. 9–10</small>Polish e metáfora</h2>
+  <h2><small>MÉTRICAS 4–5 · CAP. 9–10</small>Polish e metaphor</h2>
   <div class="row" style="gap:30px">
     <div class="col">
       <h3>POLISH VENDE A INTERAÇÃO</h3>
       <ul class="px">
-        <li><span class="c">Animação</span>: squash & stretch, antecipação</li>
-        <li><span class="c">Visual</span>: partículas, poeira, faíscas</li>
-        <li><span class="c">Som</span>: o impacto que você "ouve" como peso</li>
-        <li><span class="c">Câmera</span>: tremor de tela, câmera lenta</li>
-        <li><span class="c">Tato</span>: vibração do controle</li>
+        <li><span class="c">Animação</span>: squash &amp; stretch, anticipation</li>
+        <li><span class="c">VFX</span>: partículas, poeira, faíscas</li>
+        <li><span class="c">SFX</span>: impacto = peso</li>
+        <li><span class="c">Câmera</span>: screen shake, slow-mo</li>
+        <li><span class="c">Haptics</span>: vibração do controle</li>
       </ul>
-      <div class="box o" style="margin-top:14px"><p><span class="y">De Blob</span>: mesma física. Sem squash, a bola parecia de pedra; com ele, de tinta.</p></div>
     </div>
     <div class="col">
-      <h3>METÁFORA CRIA EXPECTATIVA</h3>
-      <div class="box c"><p><span class="y">Representação</span>: o que é? Um carro, um gato, uma pedra.<br><span class="y">Tratamento</span>: quão realista? Icônico (Mario Kart) ou fotorreal (Project Gotham 3).</p></div>
-      <div class="box r" style="margin-top:20px"><p><span class="y">Doom 3</span>: visual realista, mas tiros com som de espoleta. Quase certo incomoda mais que abstrato.</p></div>
-      <p style="margin-top:16px">Ser <span class="y">icônico</span> facilita a harmonia.</p>
+      <h3>METAPHOR CRIA EXPECTATIVA</h3>
+      <div class="box c"><p><span class="y">Representação</span>: carro? gato? pedra?<br><span class="y">Tratamento</span>: icônico ↔ fotorrealista</p></div>
+      <div class="box r" style="margin-top:20px"><p><span class="y">Doom 3</span>: fotorrealista + tiro de espoleta = dissonância</p></div>
     </div>
   </div>
-  <aside class="notes">Polish é tudo que, se removido, não muda a funcionalidade — só a percepção. Para o jogador, simulação e polish são indistinguíveis: se algo "pesa dez toneladas" mas se move como um esquilo, é um esquilo. Shadow of the Colossus vende peso com som grave, poeira, tremor e animação lenta; em Painkiller os chefes enormes parecem pequenos. A metáfora prepara o jogador: a representação diz o que a coisa é; o tratamento, quão fiel ela precisa ser. No próximo jogo a simulação é idêntica — só mudam polish e metáfora.</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>Polish e metaphor não mudam a simulação; mudam o que o jogador acredita.</span></div>
+  <aside class="notes">Polish é tudo que, se removido, não muda a funcionalidade — só a percepção. Para o jogador, simulação e polish são indistinguíveis: se algo "pesa dez toneladas" mas se move como um esquilo, é um esquilo. de Blob: mesma física; sem squash &amp; stretch a bola parecia de pedra, com ele, de tinta. Shadow of the Colossus vende peso com SFX grave, dust, screen shake e animação lenta; em Painkiller os chefes enormes parecem pequenos. Metaphor prepara o jogador: a representação diz o que a coisa é (um carro, um gato, uma pedra); o tratamento, quão fiel ela precisa ser — icônico (Mario Kart) ou fotorrealista (Project Gotham 3). Doom 3: visual realista, mas tiros com som de espoleta — quase certo incomoda mais que abstrato. Ser icônico facilita a harmonia. No próximo jogo a simulação é idêntica — só mudam polish e metaphor.</aside>
 </section>
 
 <section class="slide gslide" data-end="32:15" data-world="3">
-  <h2>JOGO 7/8 · Polish & metáfora <span class="tag">CAP. 9–10</span></h2>
+  <h2>JOGO 7/8 · Polish e metaphor <span class="tag">CAP. 9–10</span></h2>
   <div class="game" data-game="breakout"></div>
-  <aside class="notes">O jogo joga sozinho se você não pegar o controle — ótimo para apresentar. Comece com "NADA" (tecla 0): funciona, mas é morto. Ligue um efeito por vez (1–8) e peça à plateia para dizer qual mudou mais. Depois "TUDO" (9). Troque a metáfora: Pedra (pesado, poeira, tremor forte), Gelatina (elástico, boing) e Dissonante (visual de pedra com som e física de gelatina) — a simulação nunca muda.</aside>
+  <aside class="notes">O jogo joga sozinho se você não pegar o controle — ótimo para apresentar. Comece com NADA (tecla 0): funciona, mas é morto. Ligue um efeito por vez (1–8) e peça à plateia para dizer qual mudou mais. Depois TUDO (9). Troque a metaphor: PEDRA (pesado, dust, screen shake forte), GELATINA (elástico, boing) e DISSONANTE (visual de pedra com som e física de gelatina) — a simulação nunca muda.</aside>
 </section>
 
 <section class="slide" data-end="33:00" data-world="3">
-  <h2><small>MÉTRICA 6 · CAP. 11</small>Regras: significado muda a sensação</h2>
+  <h2><small>MÉTRICA 6 · CAP. 11</small>Rules: significado muda o feel</h2>
   <div class="row" style="gap:18px">
-    <div class="col box y"><h3>ALTO NÍVEL</h3><p class="small">Metas que focam um conjunto de movimentos: 100 moedas → estrela → novas portas (Mario 64). A moeda vira motivo para precisão.</p></div>
-    <div class="col box o"><h3>MÉDIO NÍVEL</h3><p class="small">Significado imediato: com a vida baixa no Quake, o health pack vira a coisa mais importante do mapa.</p></div>
-    <div class="col box c"><h3>BAIXO NÍVEL</h3><p class="small">Propriedades de objetos: quanto dano derruba um inimigo, quantos toques quebram algo.</p></div>
+    <div class="col box y"><h3>ALTO NÍVEL</h3><p class="small">metas: 100 moedas → estrela (Mario 64)</p></div>
+    <div class="col box o"><h3>MÉDIO NÍVEL</h3><p class="small">imediato: HP baixo → health pack (Quake)</p></div>
+    <div class="col box c"><h3>BAIXO NÍVEL</h3><p class="small">propriedades: HP, dano, hits</p></div>
   </div>
   <div class="row" style="margin-top:24px;gap:18px">
-    <div class="col box l dark"><p class="small"><span class="l">Zelda</span>: cortar grama não oferece resistência, mas vicia — ela dá rupias e flechas.</p></div>
-    <div class="col box r dark"><p class="small"><span class="r">Ratchet & Clank</span>, para Swink: parafusos demais, cada um perde valor e coletar vira "aspirar".</p></div>
+    <div class="col box l dark"><p class="small"><span class="l">Zelda</span>: grama → rupias</p></div>
+    <div class="col box r dark"><p class="small"><span class="r">Ratchet &amp; Clank</span>: inflação de parafusos</p></div>
   </div>
-  <aside class="notes">Driblar num campo vazio tem algum apelo cinestésico, mas o que faz alguém treinar por horas é a chance de driblar dois zagueiros e marcar. As habilidades que as regras tornam importantes passam a ser importantes — e o feel muda junto.</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>As regras decidem o que importa, e o jogador passa a se mover diferente.</span></div>
+  <aside class="notes">Driblar num campo vazio tem algum apelo cinestésico, mas o que faz alguém treinar por horas é a chance de driblar dois zagueiros e marcar. High level: metas que focam um conjunto de movimentos — 100 moedas → estrela → novas portas no Mario 64; a moeda vira motivo para precisão. Mid level: significado imediato — com a vida baixa no Quake, o health pack vira a coisa mais importante do mapa. Low level: propriedades de objetos — quanto dano derruba um inimigo, quantos hits quebram algo. Zelda: cortar grama não oferece resistência, mas vicia — dá rupias e flechas. Ratchet &amp; Clank, para Swink: parafusos demais, cada um perde valor e coletar vira "aspirar". As habilidades que as rules tornam importantes passam a ser importantes — e o feel muda junto.</aside>
 </section>
 
 <section class="slide gslide" data-end="35:00" data-world="3">
-  <h2>JOGO 8/8 · Regras dão sentido <span class="tag">CAP. 11</span></h2>
+  <h2>JOGO 8/8 · Rules e significado <span class="tag">CAP. 11</span></h2>
   <div class="game" data-game="regras"></div>
-  <aside class="notes">O movimento é idêntico nos quatro modos. Sem regras: as moedas são enfeite, você passeia. Com pontos e tempo: cada curva vira otimização. Sobrevivência: o coração ganha prioridade e o espaço muda de significado. Moedas resistentes: três toques e um empurrão — você passa a "atacar" a moeda. Pergunte: o controle mudou?</aside>
+  <aside class="notes">O movimento é idêntico nos quatro modos. SEM REGRAS: as moedas são enfeite, você passeia. PONTOS + TEMPO: cada curva vira otimização. SOBREVIVÊNCIA: o coração ganha prioridade e o espaço muda de significado. MOEDA RESISTENTE: três hits e um knockback — você passa a "atacar" a moeda. Pergunte: o controle mudou?</aside>
 </section>
 
 <section class="slide" data-end="37:15" data-world="4">
-  <h2><small>MUNDO 4 · CAP. 17</small>7 princípios do game feel</h2>
+  <h2><small>MUNDO 4 · CAP. 17</small>7 princípios</h2>
   <div class="princ">
-    <div class="box s"><span class="num">1</span><b>Resultados previsíveis</b><p>Inimigos: ambiguidade de controle, excesso de estados, ação mal encenada.</p></div>
-    <div class="box s"><span class="num">2</span><b>Resposta instantânea</b><p>Algo visível em 70–100 ms, mesmo com ataque longo (Warthog).</p></div>
-    <div class="box s"><span class="num">3</span><b>Fácil, mas profundo</b><p>Mapeamento natural + sensibilidade + desafios (tempo, ranking).</p></div>
-    <div class="box s"><span class="num">4</span><b>Novidade</b><p>Variações sutis; com física, nenhum input é igual ao outro.</p></div>
-    <div class="box l"><span class="num">5</span><b>Resposta atraente</b><p>Gostoso até num espaço vazio. Falhar também deve ser divertido.</p></div>
-    <div class="box l"><span class="num">6</span><b>Movimento orgânico</b><p>Arcos e curvas: forças em vez de posição fixa.</p></div>
-    <div class="box y"><span class="num">7</span><b>Harmonia</b><p>Tudo sustenta uma única realidade física, coerente.</p></div>
+    <div class="box s"><span class="num">1</span><b>Resultados previsíveis</b><p>inimigos: input ambíguo, estados demais, má encenação</p></div>
+    <div class="box s"><span class="num">2</span><b>Resposta instantânea</b><p>feedback &lt; 100 ms, mesmo com attack longo</p></div>
+    <div class="box s"><span class="num">3</span><b>Fácil de aprender, difícil de dominar</b><p>mapping natural + sensitivity + desafio</p></div>
+    <div class="box s"><span class="num">4</span><b>Novidade</b><p>variações sutis: repetir a ação não cansa</p></div>
+    <div class="box l"><span class="num">5</span><b>Resposta atraente</b><p>divertido no vazio; falhar também diverte</p></div>
+    <div class="box l"><span class="num">6</span><b>Movimento orgânico</b><p>forças, não posições → arcos</p></div>
+    <div class="box y"><span class="num">7</span><b>Harmonia</b><p>uma só realidade física, coerente</p></div>
   </div>
-  <aside class="notes">Os princípios lembram os da animação da Disney: staging, slow-in/slow-out, arcos. No Mario 64, apertar A e Z juntos dá resultados aparentemente aleatórios (ambiguidade). No Tony Hawk, estados demais confundem iniciantes. O Ski Stunt Simulator torna o fracasso divertido. Dica prática para amanhã: grave input × resposta por frame, desenhe o ADSR de cada verbo, afine movimento e espaço juntos, e perdoe o jogador — coyote time e buffer de input programam a percepção dele. Harmonia é o mais difícil: tudo precisa contar a mesma história física.</aside>
+  <div class="guide"><b>IDEIA-CHAVE</b><span>Use como checklist: se um princípio falha, o feel falha junto.</span></div>
+  <aside class="notes">Os princípios lembram os da animação da Disney: staging, slow-in/slow-out, arcos. Resultados previsíveis têm três inimigos: input ambíguo (no Mario 64, apertar A e Z juntos dá resultados aparentemente aleatórios), estados demais (no Tony Hawk, confundem iniciantes) e ação mal encenada (staging). Resposta instantânea: algo visível em 70–100 ms, mesmo com attack longo (Warthog). Fácil de aprender, difícil de dominar: mapping natural + sensitivity + desafios (tempo, ranking). Novidade: variações sutis mantêm a ação fresca mesmo depois de mil repetições. Física é um jeito (nenhum input analógico se repete), mas dá para conseguir com variação de pitch no SFX, animações alternadas, partículas aleatórias e level design que coloca o mesmo verbo em situações diferentes. Resposta atraente: gostoso até num espaço vazio — o Ski Stunt Simulator torna o fracasso divertido. Movimento orgânico: forças em vez de posição fixa geram arcos e curvas. Dica prática para amanhã: grave input × response por frame, desenhe o ADSR de cada verbo, ajuste movimento e espaço juntos, e perdoe o jogador — coyote time e input buffer programam a percepção dele. Harmonia é o mais difícil: tudo precisa sustentar uma única realidade física coerente.</aside>
 </section>
 
 <section class="slide" data-end="40:00" data-world="FIM">
   <div class="row" style="align-items:center;height:600px">
     <div class="col">
       <h2 style="font-size:34px"><small>GAME OVER?</small>Game feel é a maior fatia da torta</h2>
-      <p>É o que o jogador faz <span class="y">o tempo todo</span>, momento a momento. Vale cada iteração.</p>
+      <p>O controle <span class="y">moment-to-moment</span> é o que o jogador faz o tempo todo: vale cada iteração.</p>
       <p class="pf y blink" style="font-size:22px;margin-top:30px">PERGUNTAS?</p>
-      <div id="qrslot" data-url="https://teagu.github.io/game-feel/"><div class="qr"><div class="qrbox"></div><div><div class="qt">LEVE A APRESENTAÇÃO<br>E OS 8 MINI-JOGOS</div><p class="small muted">Aponte a câmera do celular. Os jogos rodam melhor no computador.</p><div class="qu"></div></div></div><div class="qrfallback" style="display:flex;gap:26px;margin-top:40px;align-items:flex-end"><span class="spr bob" data-s="pixo" data-k="9"></span><span class="spr bob" data-s="coin" data-k="5" style="animation-delay:.4s"></span><span class="spr bob" data-s="heart" data-k="5" style="animation-delay:.8s"></span></div></div>
+      <div id="qrslot" data-url="https://teagu.github.io/game-feel/"><div class="qr"><div class="qrbox"></div><div><div class="qt">SLIDES E<br>8 MINI-JOGOS</div><p class="small muted">Os jogos rodam melhor no computador.</p><div class="qu"></div></div></div><div class="qrfallback" style="display:flex;gap:26px;margin-top:40px;align-items:flex-end"><span class="spr bob" data-s="pixo" data-k="9"></span><span class="spr bob" data-s="coin" data-k="5" style="animation-delay:.4s"></span><span class="spr bob" data-s="heart" data-k="5" style="animation-delay:.8s"></span></div></div>
     </div>
     <div style="width:520px">
       <div class="box c">
@@ -720,7 +729,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:22px;background:var(--yell
       </div>
     </div>
   </div>
-  <aside class="notes">Feche com a ideia da introdução do livro: se você decompõe as atividades de um jogo, o controle momento a momento é a maior fatia. Abra para perguntas. Se sobrar tempo, volte a um dos jogos (Home/End navegam) e deixe alguém da plateia tunar o pulo.</aside>
+  <aside class="notes">Feche com a ideia da introdução do livro: se você decompõe as atividades de um jogo, o controle moment-to-moment é a maior fatia — é o que o jogador faz o tempo todo, então vale cada iteração. Abra para perguntas. Se sobrar tempo, volte a um dos jogos (Home/End navegam) e deixe alguém da plateia tunar o pulo.</aside>
 </section>
 
   <div class="hud">
@@ -740,10 +749,10 @@ input[type=range]::-moz-range-thumb{width:12px;height:22px;background:var(--yell
 <div id="help"><div class="box y" onclick="event.stopPropagation()">
   <h3 style="margin-bottom:14px">CONTROLES DA APRESENTAÇÃO</h3>
   <table>
-   <tr><td>→ · Espaço · PageDown</td><td>avançar</td></tr>
+   <tr><td>→ · Espaço · PageDown · clique</td><td>avançar</td></tr>
    <tr><td>← · PageUp</td><td>voltar</td></tr>
    <tr><td>Home · End</td><td>primeiro · último slide</td></tr>
-   <tr><td>Enter · clique</td><td>jogar o mini-jogo do slide</td></tr>
+   <tr><td>Enter · clique no jogo</td><td>jogar o mini-jogo do slide</td></tr>
    <tr><td>Esc · Tab</td><td>soltar o jogo (em tela cheia, use Tab)</td></tr>
    <tr><td>1–9 · 0</td><td>opções do mini-jogo (mesmo sem jogar)</td></tr>
    <tr><td>PageUp/PageDown</td><td>navegam mesmo durante o jogo (passador)</td></tr>
@@ -888,7 +897,7 @@ class Game{
     const left=mk('div','gleft'), wrap=mk('div','gwrap'), cv=mk('canvas'); cv.width=W; cv.height=H;
     wrap.append(cv); left.append(wrap);
     const stat=mk('div','gstat'), ov=mk('button','chip'), on=mk('span','chip on');
-    ov.innerHTML='<span class="blink">&#9654;</span> ENTER = JOGAR'; on.innerHTML='&#9679; ESC/TAB = SOLTAR';
+    ov.innerHTML='<span class="blink">&#9654;</span> ENTER = JOGAR'; on.innerHTML='&#9679; ESC/TAB = SAIR';
     const help=mk('div','ghelp'); help.innerHTML=def.help||'';
     stat.append(ov,on,help); left.append(stat);
     this.left=left;
@@ -1062,7 +1071,7 @@ function resetTimer(){ timer.acc=0; timer.t0=performance.now(); updateTimer(true
 function fit(){ const s=Math.min(innerWidth/1280,innerHeight/720); stage.style.transform=`scale(${s})`; }
 function activeGame(){ const el=slides[cur]&&slides[cur].querySelector('.game'); return el&&el._game?el._game:null; }
 function worldLabel(i){
-  const w=slides[i].dataset.world; if(w==='START'||w==='FIM') return w;
+  const w=slides[i].dataset.world; if(w==='START') return w; if(w==='FIM') return 'FIM';
   let n=0; for(let j=0;j<=i;j++) if(slides[j].dataset.world===w) n++;
   return 'MUNDO '+w+'-'+n;
 }
@@ -1088,7 +1097,7 @@ function updateTimer(force){
 }
 function updateNotes(){
   const n=document.getElementById('notes'), a=slides[cur].querySelector('aside.notes');
-  n.innerHTML=`<div class="nh">NOTAS · SLIDE ${cur+1}/${slides.length} · META ATE ${slides[cur].dataset.end} DE ${fmtT(totalT())} · P = JANELA DO APRESENTADOR</div>`+(a?a.innerHTML:'');
+  n.innerHTML=`<div class="nh"><span>NOTAS · SLIDE ${cur+1}/${slides.length} · META ATE ${slides[cur].dataset.end} DE ${fmtT(totalT())} · P = JANELA DO APRESENTADOR</span><button class="nclose" title="Fechar notas (N)">&times; FECHAR</button></div>`+(a?a.innerHTML:'');
   updatePresenter();
 }
 let pres=null;
@@ -1164,7 +1173,16 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('keyup',e=>{ Keys[e.code]=false; if(Host.captured) Host.captured.keyup(e.code); });
 window.addEventListener('blur',()=>{ for(const k in Keys) Keys[k]=false; });
+/* clique na tela avança; anota se havia jogo capturado antes do mousedown soltá-lo */
+let _downWhileCaptured=false;
+document.addEventListener('mousedown',()=>{ _downWhileCaptured=!!Host.captured; },true);
 document.addEventListener('mousedown',e=>{ if(Host.captured&&!Host.captured.el.contains(e.target)) Host.release(); });
+function clickAdvance(e){
+  if(e.button!==0||_downWhileCaptured) return;
+  if(e.target.closest('a,button,input,select,textarea,label,.ck,.game,.hud')) return;
+  if(window.getSelection&&String(window.getSelection())) return;
+  go(cur+1);
+}
 
 let _last=performance.now(), _sec=-1;
 function frame(now){
@@ -1197,6 +1215,8 @@ function boot(){
   document.querySelectorAll('.hud .hb').forEach(b=>b.addEventListener('click',()=>{ const a=b.dataset.a; if(a==='prev') go(cur-1); else if(a==='next') go(cur+1); else if(a==='notes') toggleNotes(); else if(a==='help') toggleHelp(); b.blur(); }));
   document.querySelectorAll('.ck').forEach(c=>c.addEventListener('click',()=>{ c.classList.toggle('on'); SFX.ensure(); SFX.play(c.classList.contains('on')?'coin':'select'); }));
   document.getElementById('help').addEventListener('mousedown',()=>toggleHelp(false));
+  document.getElementById('viewport').addEventListener('click',clickAdvance);
+  document.getElementById('notes').addEventListener('click',e=>{ const b=e.target.closest('.nclose'); if(b){ b.blur(); document.getElementById('notes').classList.remove('show'); } });
   renderSprites();
   renderQR();
   document.querySelectorAll('.game[data-game]').forEach(el=>{ const def=GameDefs[el.dataset.game]; if(def){ try{ el._game=new Game(el,def); }catch(err){ console.error('jogo',el.dataset.game,err); } } });
@@ -1216,34 +1236,34 @@ function boot(){
    ========================================================= */
 (function(){
 const REG={
-  '111':['GAME FEEL VERDADEIRO','Sonic, Mario 64, Half-Life'],
-  '110':['FEEL "CRU"','funciona, mas sem graça: falta polish'],
+  '111':['GAME FEEL COMPLETO','Sonic, Mario 64, Half-Life'],
+  '110':['FEEL CRU','funciona, mas sem polish'],
   '101':['ESTÉTICA SEM SUBSTÂNCIA','polish sem espaço: algo não bate'],
-  '011':['SIMULAÇÃO + POLISH','você só assiste: Peggle, Starcraft'],
-  '100':['CONTROLE NU','ele está andando? como saber?'],
-  '010':['SIMULAÇÃO NUA','Bridge Builder'],
-  '001':['POLISH NU','Bejeweled, Civilization 4'],
+  '011':['SIMULAÇÃO + POLISH','sem controle direto: Peggle, Starcraft'],
+  '100':['SÓ CONTROLE','está andando? sem referência, não dá para saber'],
+  '010':['SÓ SIMULAÇÃO','Bridge Builder'],
+  '001':['SÓ POLISH','Bejeweled, Civilization 4'],
   '000':['NADA','só um quadrado azul']
 };
 const VENN=`<svg viewBox="0 0 300 218" width="78%" style="display:block;margin:4px auto 6px" font-family="'Press Start 2P',monospace">
  <circle class="vC" cx="115" cy="84" r="64" fill="#41a6f6" stroke="#41a6f6" stroke-width="3"/>
  <circle class="vS" cx="185" cy="84" r="64" fill="#a7f070" stroke="#a7f070" stroke-width="3"/>
  <circle class="vP" cx="150" cy="140" r="64" fill="#ef7d57" stroke="#ef7d57" stroke-width="3"/>
- <text x="2" y="12" font-size="9" fill="#41a6f6">CONTROLE</text>
- <text x="298" y="12" font-size="9" fill="#a7f070" text-anchor="end">ESPAÇO</text>
+ <text x="2" y="12" font-size="9" fill="#41a6f6">CONTROL</text>
+ <text x="298" y="12" font-size="9" fill="#a7f070" text-anchor="end">SPACE</text>
  <text x="150" y="216" font-size="9" fill="#ef7d57" text-anchor="middle">POLISH</text></svg>
  <div class="regname"></div><div class="regex"></div>`;
 const WW=800,WH=496;
 defineGame('blocos',{
   help:'<b>Setas/WASD</b> mover · <b>1 2 3</b> liga/desliga cada bloco',
   params:[
-    {type:'sec',label:'OS 3 BLOCOS'},
-    {id:'ctrl',type:'toggle',label:'Controle em tempo real',value:true,key:'1'},
-    {id:'space',type:'toggle',label:'Espaço simulado',value:false,key:'2'},
+    {type:'sec',label:'BUILDING BLOCKS'},
+    {id:'ctrl',type:'toggle',label:'Real-time control',value:true,key:'1'},
+    {id:'space',type:'toggle',label:'Simulated space',value:false,key:'2'},
     {id:'polish',type:'toggle',label:'Polish',value:false,key:'3'},
     {type:'html',id:'venn',html:VENN},
-    {type:'ro',id:'vel',label:'Velocidade real'},
-    {type:'try',items:['Só controle: ele está andando? O número diz que sim.','<b>2</b>: o espaço dá referência e colisão.','<b>3</b>: poeira, squash, som e tremor.','<b>1</b>: sem controle, vira filme.']}
+    {type:'ro',id:'vel',label:'Velocidade'},
+    {type:'try',items:['Só controle: ele está andando? Veja a velocidade.','<b>2</b>: o espaço dá referência e collision.','<b>3</b>: poeira, squash, SFX e screen shake.','<b>1</b>: sem controle, vira cutscene.']}
   ],
   init(g){
     const rng=mulberry(11); g.blocks=[]; let tries=0;
@@ -1321,7 +1341,7 @@ defineGame('blocos',{
     if(p.polish){ const st=Math.min(0.22,Math.hypot(a.vx,a.vy)/650); if(Math.abs(a.vx)>Math.abs(a.vy)){ sx*=1+st; sy*=1-st; } else { sx*=1-st; sy*=1+st; } }
     if(p.space){ ctx.fillStyle='rgba(14,15,24,.45)'; ctx.fillRect(Math.round(a.x-cx-6),Math.round(a.y-cy+6),12,3); }
     g.pixo(a.x-cx,a.y-cy,{s:12,sx,sy,lx:p.polish?a.vx/80:0,ly:p.polish?a.vy/80:0});
-    if(!p.ctrl) g.text('ASSISTINDO...',6,6,PAL.orange);
+    if(!p.ctrl) g.text('CUTSCENE',6,6,PAL.orange);
   }
 });
 })();
@@ -1333,11 +1353,11 @@ defineGame('blocos',{
 defineGame('lag',{
   help:'<b>Setas/WASD</b> mover · mantenha o Pixo dentro do alvo amarelo',
   params:[
-    {type:'sec',label:'O LADO DO COMPUTADOR'},
-    {id:'lat',type:'range',label:'Latência do input',min:0,max:500,step:10,value:0,fmt:v=>v+' ms'},
-    {id:'fps',type:'range',label:'Quadros por segundo',min:3,max:60,step:1,value:60,fmt:v=>v+' FPS'},
-    {id:'hitch',type:'toggle',label:'Engasgos (sem continuidade)',value:false,key:'8'},
-    {type:'presets',label:'ATALHOS',presets:[
+    {type:'sec',label:'LADO DA MÁQUINA'},
+    {id:'lat',type:'range',label:'Input lag',min:0,max:500,step:10,value:0,fmt:v=>v+' ms'},
+    {id:'fps',type:'range',label:'Frame rate',min:3,max:60,step:1,value:60,fmt:v=>v+' FPS'},
+    {id:'hitch',type:'toggle',label:'Hitches',value:false,key:'8'},
+    {type:'presets',label:'PRESETS',presets:[
       {label:'IDEAL',key:'1',values:{lat:0,fps:60,hitch:false}},
       {label:'50 MS',key:'2',values:{lat:50,fps:60,hitch:false}},
       {label:'100 MS',key:'3',values:{lat:100,fps:60,hitch:false}},
@@ -1347,21 +1367,21 @@ defineGame('lag',{
       {label:'5 FPS',key:'7',values:{lat:0,fps:5,hitch:false}}
     ]},
     {type:'sec',label:'MEDIÇÃO'},
-    {type:'ro',id:'resp',label:'Resposta ≈'},
-    {type:'ro',id:'cls',label:'Sensação'},
+    {type:'ro',id:'resp',label:'Tempo de resposta ≈'},
+    {type:'ro',id:'cls',label:'Feel'},
     {type:'ro',id:'mov',label:'Movimento'},
     {type:'ro',id:'score',label:'Tempo no alvo'},
     {type:'html',id:'keys',html:'<div class="rlabel" style="margin-top:8px">Seu input, em tempo real:</div><div class="keyviz"><i>&#8592;</i><i>&#8593;</i><i>&#8595;</i><i>&#8594;</i></div>'},
-    {type:'try',items:['IDEAL → 100 → 200 → 300 ms: quando quebra?','Veja a tecla acender antes do Pixo andar.','10 e 5 FPS: ainda parece movimento?','Liga os engasgos (8).']}
+    {type:'try',items:['IDEAL → 100 → 200 → 300 ms: onde quebra?','Veja o input acender antes do Pixo responder.','10 e 5 FPS: ainda parece movimento?','Ligue os hitches (8).']}
   ],
   init(g){ g.a={x:110,y:100,lx:0,ly:0}; g.hist=[]; g.acc=0; g.st=0; g.fz=0; g.score=0; g.on=false; g.kv=-1; g.trail=[]; g.tx=160; g.ty=98; },
   onParam(g){
     const p=g.p, r=Math.round(p.lat+1000/p.fps);
     g.setRO('resp',r+' ms');
-    let t,c; if(r<=50){ t='INSTANTÂNEO'; c=PAL.lime; } else if(r<=100){ t='FIRME'; c=PAL.green; } else if(r<=200){ t='PERCEPTÍVEL'; c=PAL.yellow; } else if(r<240){ t='LENTO'; c=PAL.orange; } else { t='QUEBRADO'; c='#ff6b7f'; }
+    let t,c; if(r<=50){ t='INSTANTÂNEO'; c=PAL.lime; } else if(r<=100){ t='TIGHT'; c=PAL.green; } else if(r<=200){ t='PERCEPTÍVEL'; c=PAL.yellow; } else if(r<240){ t='SLUGGISH'; c=PAL.orange; } else { t='QUEBRADO'; c='#ff6b7f'; }
     g.setRO('cls',t,c);
     let mt,mc; if(p.fps<10){ mt='sem ilusão de movimento'; mc='#ff6b7f'; } else if(p.fps<20){ mt='travado'; mc=PAL.orange; } else if(p.fps<30){ mt='aceitável'; mc=PAL.yellow; } else { mt='suave'; mc=PAL.lime; }
-    if(p.hitch){ mt+=' + engasgos'; mc=PAL.orange; }
+    if(p.hitch){ mt+=' + hitches'; mc=PAL.orange; }
     g.setRO('mov',mt,mc);
   },
   update(g,dt){
@@ -1403,7 +1423,7 @@ defineGame('lag',{
    ========================================================= */
 (function(){
 const FLOOR=150;
-const PH={idle:['parado',PAL.lgray],attack:['ATAQUE',PAL.lime],decay:['DECAIMENTO',PAL.cyan],sustain:['SUSTENTAÇÃO',PAL.sky],release:['LIBERAÇÃO',PAL.orange],skid:['FREADA',PAL.red]};
+const PH={idle:['parado',PAL.lgray],attack:['ATTACK',PAL.lime],decay:['DECAY',PAL.cyan],sustain:['SUSTAIN',PAL.sky],release:['RELEASE',PAL.orange],skid:['FREADA',PAL.red]};
 function envSVG(p){
   const A=p.a,D=p.s<0.999?p.d:0,S=p.s,R=p.r,hold=0.9,T=Math.max(0.6,A+D+hold+R);
   const w=300,h=104,X=t=>10+t/T*(w-20),Y=v=>h-18-v*(h-34);
@@ -1413,7 +1433,7 @@ function envSVG(p){
   return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="display:block;background:#0e0f18;margin:4px 0 6px" font-family="VT323,monospace" font-size="17" fill="#ffcd75">
    <rect x="10" y="${Y(0)}" width="${w-20}" height="2" fill="#566c86"/>
    <rect x="${rel}" y="10" width="1" height="${h-28}" fill="#566c86"/>
-   <text x="${rel}" y="12" fill="#94b0c2" text-anchor="middle" font-size="14">solta</text>
+   <text x="${rel}" y="12" fill="#94b0c2" text-anchor="middle" font-size="14">soltou</text>
    <polyline points="${pts}" fill="none" stroke="#a7f070" stroke-width="3" stroke-linejoin="round"/>
    ${A>0.04?lab(A/2,'A'):''}${D>0.04?lab(A+D/2,'D'):''}${lab(A+D+hold/2,'S')}${R>0.04?lab(A+D+hold+R/2,'R'):''}</svg>`;
 }
@@ -1421,11 +1441,11 @@ function newZone(g){ let x; do{ x=rand(36,284); }while(Math.abs(x-g.a.x)<80); g.
 defineGame('adsr',{
   help:'<b>←/→</b> ou <b>A/D</b> mover · pare dentro da zona amarela',
   params:[
-    {type:'sec',label:'ENVELOPE ADSR'},
-    {id:'a',type:'range',label:'Ataque',min:0,max:3,step:0.05,value:0.35,fmt:v=>v.toFixed(2)+' s'},
-    {id:'d',type:'range',label:'Decaimento',min:0,max:1.5,step:0.05,value:0,fmt:v=>v.toFixed(2)+' s'},
-    {id:'s',type:'range',label:'Sustentação',min:0.2,max:1,step:0.05,value:1,fmt:v=>Math.round(v*100)+'%'},
-    {id:'r',type:'range',label:'Liberação',min:0,max:4,step:0.05,value:0.4,fmt:v=>v.toFixed(2)+' s'},
+    {type:'sec',label:'ADSR ENVELOPE'},
+    {id:'a',type:'range',label:'Attack',min:0,max:3,step:0.05,value:0.35,fmt:v=>v.toFixed(2)+' s'},
+    {id:'d',type:'range',label:'Decay',min:0,max:1.5,step:0.05,value:0,fmt:v=>v.toFixed(2)+' s'},
+    {id:'s',type:'range',label:'Sustain',min:0.2,max:1,step:0.05,value:1,fmt:v=>Math.round(v*100)+'%'},
+    {id:'r',type:'range',label:'Release',min:0,max:4,step:0.05,value:0.4,fmt:v=>v.toFixed(2)+' s'},
     {id:'max',type:'range',label:'Velocidade máx.',min:40,max:200,step:5,value:100,fmt:v=>v+' px/s'},
     {type:'html',id:'env',html:''},
     {type:'presets',label:'PRESETS',presets:[
@@ -1437,7 +1457,7 @@ defineGame('adsr',{
     ]},
     {type:'ro',id:'phase',label:'Fase atual'},
     {type:'ro',id:'ok',label:'Paradas na zona'},
-    {type:'try',items:['JUMPMAN: preciso, mas duro como um órgão.','MARIO: acelera e escorrega um pouco.','ASTEROIDS: solto — tente parar na zona!','DASH: pico que decai para a sustentação.']}
+    {type:'try',items:['JUMPMAN: preciso, mas stiff, como um órgão.','MARIO: acelera e escorrega um pouco.','ASTEROIDS: loose, tente parar na zona!','DASH: pico que cai (decay) até o sustain.']}
   ],
   init(g){ g.a={x:60,v:0,ph:'idle',sx:1,sy:1}; g.hist=[]; g.hAcc=0; g.ok=0; g.rel=null; g.lastDir=0; g.moved=false; g.dustT=0; newZone(g); },
   onParam(g){ g.ui.env.el.innerHTML=envSVG(g.p); },
@@ -1514,16 +1534,16 @@ defineGame('adsr',{
 defineGame('sens',{
   help:'Modos 1–2: <b>setas/WASD</b> · modos 3–4: <b>mouse</b> sobre o jogo · acerte o ponto vermelho',
   params:[
-    {type:'sec',label:'INPUT × RESPOSTA'},
+    {type:'sec',label:'INPUT × RESPONSE'},
     {type:'html',id:'mx',html:`<div class="matrix">
-      <div data-m="2"><b>2 · INPUT BAIXO RESPOSTA ALTA</b>teclas somam forças</div>
-      <div data-m="4"><b>4 · INPUT ALTO RESPOSTA ALTA</b>mouse puxa com mola</div>
-      <div data-m="1"><b>1 · INPUT BAIXO RESPOSTA BAIXA</b>tecla = velocidade fixa</div>
-      <div data-m="3"><b>3 · INPUT ALTO RESPOSTA BAIXA</b>mouse = posição</div></div>
-      <div class="tiny muted" style="text-align:center">↑ resposta · input →</div>`},
+      <div data-m="2"><b>2 · INPUT BAIXO · RESPONSE ALTA</b>teclas somam forças</div>
+      <div data-m="4"><b>4 · INPUT ALTO · RESPONSE ALTA</b>mouse puxa com mola</div>
+      <div data-m="1"><b>1 · INPUT BAIXO · RESPONSE BAIXA</b>tecla = velocidade fixa</div>
+      <div data-m="3"><b>3 · INPUT ALTO · RESPONSE BAIXA</b>mouse = posição</div></div>
+      <div class="tiny muted" style="text-align:center">↑ response · input →</div>`},
     {type:'ro',id:'hits',label:'Acertos'},
     {type:'ro',id:'avg',label:'Tempo médio'},
-    {type:'try',items:['1: linhas retas, robótico (veja o rastro).','2: curvas orgânicas e peso.','3: preciso, fácil... e sem graça.','4: chicoteie! Tente fazer um oito.']}
+    {type:'try',items:['1: linhas retas, robótico (veja o rastro).','2: curvas orgânicas, com peso.','3: preciso, fácil... e sem peso.','4: chicoteie! Tente fazer um 8.']}
   ],
   init(g){
     g.a={x:160,y:100,vx:0,vy:0}; g.trail=[]; g.hits=0; g.times=[]; g.lastHit=0; g.mode=1;
@@ -1640,27 +1660,27 @@ function physStep(g,h){
   if(!a.ground) a.minY=Math.min(a.minY,a.y+a.h);
 }
 defineGame('pulo',{
-  help:'<b>←/→</b> andar · <b>Espaço/↑/Z</b> pular (segure para ir mais alto)',
+  help:'<b>←/→</b> andar · <b>Espaço/↑/Z</b> pular (segure = mais alto)',
   params:[
-    {type:'sec',label:'GRAVIDADE E PULO'},
-    {id:'g',type:'range',label:'Gravidade (subida)',min:300,max:2500,step:50,value:1100},
-    {id:'v0',type:'range',label:'Força do pulo',min:150,max:500,step:5,value:340},
-    {id:'fall',type:'range',label:'Gravidade na queda',min:1,max:4,step:0.1,value:3,fmt:v=>v.toFixed(1)+'×'},
-    {id:'term',type:'range',label:'Velocidade terminal',min:120,max:900,step:10,value:360},
-    {id:'air',type:'range',label:'Controle no ar',min:0,max:1,step:0.05,value:0.65,fmt:v=>Math.round(v*100)+'%'},
-    {id:'vari',type:'toggle',label:'Pulo variável (segurar = mais alto)',value:true,key:'8'},
-    {id:'tol',type:'toggle',label:'Tolerância (coyote time + buffer)',value:true,key:'9'},
+    {type:'sec',label:'JUMP TUNING'},
+    {id:'g',type:'range',label:'Gravity (rise)',min:300,max:2500,step:50,value:1100},
+    {id:'v0',type:'range',label:'Jump velocity',min:150,max:500,step:5,value:340},
+    {id:'fall',type:'range',label:'Fall gravity',min:1,max:4,step:0.1,value:3,fmt:v=>v.toFixed(1)+'×'},
+    {id:'term',type:'range',label:'Terminal velocity',min:120,max:900,step:10,value:360},
+    {id:'air',type:'range',label:'Air control',min:0,max:1,step:0.05,value:0.65,fmt:v=>Math.round(v*100)+'%'},
+    {id:'vari',type:'toggle',label:'Variable jump height',value:true,key:'8'},
+    {id:'tol',type:'toggle',label:'Coyote time + jump buffer',value:true,key:'9'},
     {type:'presets',label:'PRESETS',presets:[
       {label:'CLÁSSICO',key:'1',values:{g:1100,v0:340,fall:3,term:360,air:0.65,vari:true,tol:true}},
-      {label:'FLUTUANTE',key:'2',values:{g:520,v0:235,fall:1,term:220,air:1,vari:false,tol:true}},
+      {label:'FLOATY',key:'2',values:{g:520,v0:235,fall:1,term:220,air:1,vari:false,tol:true}},
       {label:'REALISTA',key:'3',values:{g:1100,v0:335,fall:1,term:900,air:0,vari:false,tol:false}},
       {label:'LUA',key:'4',values:{g:300,v0:180,fall:1,term:160,air:0.5,vari:false,tol:true}}
     ]},
     {type:'sec',label:'ÚLTIMO PULO'},
     {type:'ro',id:'h',label:'Altura'},
-    {type:'ro',id:'air',label:'Tempo no ar'},
+    {type:'ro',id:'air',label:'Air time'},
     {type:'ro',id:'rf',label:'Subida / descida'},
-    {type:'try',items:['Qual plataforma é a mais gostosa? (2 a 6)','Toque rápido × segurar o pulo.','Gravidade na queda em 1×: sente o "flutuante"?','Desligue a tolerância (9) e pule na beira do buraco.']}
+    {type:'try',items:['Qual plataforma tem o melhor feel? (2–6)','Toque rápido × segurar o pulo.','Fall gravity em 1×: ficou floaty?','Desligue o coyote time (9) e pule na borda.']}
   ],
   init(g){ g.a={x:20,y:150,w:8,h:10,vx:0,vy:0,ground:true,lastGround:0,jumped:false,rising:false,face:1,sx:1,sy:1,isJump:false,jy0:0,minY:0,jt0:0,apexT:-1}; g.arc=[]; g.lastArc=[]; g.jq=-1; g.jqFlag=false; g.acc=0; g.arcT=0; g.dustT=0; reset(g); },
   keydown(g,code){ if(/^(Space|ArrowUp|KeyW|KeyZ|KeyK|KeyJ)$/.test(code)){ g.jq=g.t; g.jqFlag=true; } },
@@ -1711,7 +1731,7 @@ function walls(g,wx){
   let t=c-half,b=c+half; if(t<6){ b+=6-t; t=6; } if(b>174){ t-=b-174; b=174; } t=Math.max(6,t);
   return [Math.round(t),Math.round(b)];
 }
-const NAMES={slide:'TOBOÁGUA',stick:'COLA',bounce:'QUICA',boom:'EXPLODE'};
+const NAMES={slide:'SLIDE',stick:'STICK',bounce:'BOUNCE',boom:'EXPLODE'};
 function die(g){
   const a=g.a; g.emit(a.x,a.y,{n:40,spd:110,life:0.8,col:[PAL.yellow,PAL.orange,PAL.red,PAL.white],size:3});
   g.shake(6); g.sfx('explode'); g.dead=0.9; g.deaths++;
@@ -1721,20 +1741,20 @@ function die(g){
 function respawn(g){ const a=g.a; a.x=60; const [t,b]=walls(g,g.scroll+60); a.y=(t+b)/2; a.vx=a.vy=0; g.inv=1.3; g.start=g.scroll; g.stuck=0;
   g.rocks=g.rocks.filter(r=>!(r.x-g.scroll<110&&r.x-g.scroll>20)); }
 defineGame('contexto',{
-  help:'<b>Setas/WASD</b> pilotar · <b>1–4</b> tipo de colisão',
+  help:'<b>Setas/WASD</b> pilotar · <b>1–4</b> collision response',
   params:[
-    {type:'sec',label:'AJUSTE 1: O AVATAR'},
-    {id:'spd',type:'range',label:'Velocidade do avatar',min:50,max:220,step:5,value:120},
-    {type:'sec',label:'AJUSTE 2: O ESPAÇO'},
-    {id:'gap',type:'range',label:'Espaçamento dos obstáculos',min:30,max:220,step:5,value:110,fmt:v=>v+' px'},
-    {id:'wid',type:'range',label:'Largura do corredor',min:40,max:170,step:5,value:130,fmt:v=>v+' px'},
-    {id:'scroll',type:'range',label:'Velocidade de rolagem',min:20,max:160,step:5,value:60},
-    {type:'sec',label:'COLISÃO (BAIXO NÍVEL)'},
-    {id:'col',type:'radio',value:'slide',options:[{v:'slide',label:'TOBOÁGUA',key:'1'},{v:'stick',label:'COLA',key:'2'},{v:'bounce',label:'QUICA',key:'3'},{v:'boom',label:'EXPLODE',key:'4'}]},
+    {type:'sec',label:'TUNING 1: AVATAR'},
+    {id:'spd',type:'range',label:'Avatar speed',min:50,max:220,step:5,value:120},
+    {type:'sec',label:'TUNING 2: ESPAÇO'},
+    {id:'gap',type:'range',label:'Obstacle spacing',min:30,max:220,step:5,value:110,fmt:v=>v+' px'},
+    {id:'wid',type:'range',label:'Corridor width',min:40,max:170,step:5,value:130,fmt:v=>v+' px'},
+    {id:'scroll',type:'range',label:'Scroll speed',min:20,max:160,step:5,value:60},
+    {type:'sec',label:'COLLISION RESPONSE'},
+    {id:'col',type:'radio',value:'slide',options:[{v:'slide',label:'SLIDE',key:'1'},{v:'stick',label:'STICK',key:'2'},{v:'bounce',label:'BOUNCE',key:'3'},{v:'boom',label:'EXPLODE',key:'4'}]},
     {type:'ro',id:'dist',label:'Distância'},
     {type:'ro',id:'best',label:'Recorde'},
     {type:'ro',id:'hits',label:'Colisões'},
-    {type:'try',items:['Espaçamento 30 → 220: de opressivo a irrelevante.','Corredor estreito: "Tetris magro".','Troque a colisão: qual é justa? qual frustra?','Afine velocidade e espaçamento juntos.']}
+    {type:'try',items:['Spacing: de 30 (tenso) a 220 (vazio).','Corredor estreito = "Tetris magro".','Collision response: qual é justa? qual frustra?','Ajuste avatar speed e spacing juntos.']}
   ],
   init(g){
     g.scroll=0; g.rocks=[]; g.next=150; g.a={x:60,y:90,vx:0,vy:0}; g.dead=0; g.inv=0; g.stuck=0; g.hits=0; g.deaths=0; g.start=0; g.best=0; g.touching=false; g.lastScrape=0;
@@ -1885,18 +1905,18 @@ defineGame('breakout',{
     {type:'sec',label:'POLISH (A SIMULAÇÃO NÃO MUDA)'},
     {id:'fx_part',type:'toggle',label:'Partículas',value:false,key:'1'},
     {id:'fx_sq',type:'toggle',label:'Squash & stretch',value:false,key:'2'},
-    {id:'fx_shake',type:'toggle',label:'Tremor de tela',value:false,key:'3'},
-    {id:'fx_stop',type:'toggle',label:'Hit-stop (congela)',value:false,key:'4'},
-    {id:'fx_snd',type:'toggle',label:'Som',value:false,key:'5'},
-    {id:'fx_flash',type:'toggle',label:'Flash e cor',value:false,key:'6'},
-    {id:'fx_anim',type:'toggle',label:'Animação (queda, olhos)',value:false,key:'7'},
+    {id:'fx_shake',type:'toggle',label:'Screen shake',value:false,key:'3'},
+    {id:'fx_stop',type:'toggle',label:'Hit-stop',value:false,key:'4'},
+    {id:'fx_snd',type:'toggle',label:'SFX',value:false,key:'5'},
+    {id:'fx_flash',type:'toggle',label:'Hit flash + cor',value:false,key:'6'},
+    {id:'fx_anim',type:'toggle',label:'Secondary animation',value:false,key:'7'},
     {id:'fx_trail',type:'toggle',label:'Rastro da bola',value:false,key:'8'},
     {type:'presets',label:'',presets:[{label:'TUDO',key:'9',values:ALL(true)},{label:'NADA',key:'0',values:ALL(false)}]},
-    {type:'sec',label:'METÁFORA'},
+    {type:'sec',label:'METAPHOR'},
     {id:'meta',type:'radio',value:'abstrato',options:[{v:'abstrato',label:'ABSTRATO'},{v:'pedra',label:'PEDRA'},{v:'gelatina',label:'GELATINA'},{v:'dissonante',label:'DISSONANTE'}]},
     {type:'ro',id:'br',label:'Tijolos quebrados'},
     {type:'ro',id:'lost',label:'Bolas perdidas'},
-    {type:'try',items:['NADA (0): funciona, mas é morto.','Um efeito por vez: qual muda mais?','TUDO (9) e troque a metáfora.','DISSONANTE: pedra que faz "boing".']}
+    {type:'try',items:['NADA (0): funciona, mas é morto.','Um efeito por vez: qual muda mais?','TUDO (9) e troque a metaphor.','DISSONANTE: pedra que faz "boing".']}
   ],
   init(g){
     g.pad={x:160,vx:0,w:44,h:6,y:166,sq:{x:1,v:0},flash:0};
@@ -1973,10 +1993,10 @@ defineGame('breakout',{
    ========================================================= */
 (function(){
 const DESC={
-  none:'As moedas estão lá... e não significam nada. Só passear.',
-  score:'20 segundos. Cada moeda vale 1 ponto. Cada curva vira otimização.',
-  survive:'A vida cai sem parar e o coração recupera. De repente o espaço tem prioridades.',
-  tough:'Cada moeda pede 3 toques e te empurra para trás, mas vale 3. Você passa a atacar.'
+  none:'As moedas não valem nada. Só passear.',
+  score:'20 s · cada moeda vale 1 ponto. Cada curva vira otimização.',
+  survive:'O HP cai sem parar e o coração cura. O espaço ganha prioridades.',
+  tough:'Cada moeda pede 3 hits e dá knockback, mas vale 3. Você passa a atacar.'
 };
 function place(g,minD=55){ let x,y,i=0; do{ x=rand(20,300); y=rand(30,164); i++; }while((Math.hypot(x-g.a.x,y-g.a.y)<minD||g.coins.some(c=>Math.hypot(c.x-x,c.y-y)<24))&&i<60); return {x,y}; }
 function reset(g){
@@ -1987,12 +2007,12 @@ function reset(g){
 defineGame('regras',{
   help:'<b>Setas/WASD</b> mover · <b>Espaço</b> nova rodada · <b>1–4</b> regras',
   params:[
-    {type:'sec',label:'REGRAS (MESMO MOVIMENTO)'},
+    {type:'sec',label:'RULES (MESMO MOVIMENTO)'},
     {id:'mode',type:'radio',value:'none',wide:true,options:[{v:'none',label:'SEM REGRAS',key:'1'},{v:'score',label:'ALTO NÍVEL: PONTOS + TEMPO',key:'2'},{v:'survive',label:'MÉDIO NÍVEL: SOBREVIVÊNCIA',key:'3'},{v:'tough',label:'BAIXO NÍVEL: MOEDA RESISTENTE',key:'4'}]},
     {type:'html',id:'desc',html:'<p class="tiny" style="line-height:1.1;color:#94b0c2;margin:4px 0 8px"></p>'},
     {type:'ro',id:'sc',label:'Pontos'},
     {type:'ro',id:'best',label:'Recorde'},
-    {type:'try',items:['Sem regras: o que você faz com as moedas?','Pontos + tempo: suas curvas mudam?','Sobrevivência: o coração vira prioridade.','Moeda resistente: você passa a atacar.']}
+    {type:'try',items:['Sem regras: o que você faz com as moedas?','Pontos + tempo: suas curvas mudam?','Sobrevivência: o coração vira prioridade.','Moeda resistente: coletar vira atacar.']}
   ],
   init(g){ g.a={x:160,y:100,vx:0,vy:0}; g.best={none:0,score:0,survive:0,tough:0}; g.coins=[]; reset(g); },
   onParam(g,id){ if(id==='mode'||id==='*init'){ reset(g); g.ui.desc.el.querySelector('p').textContent=DESC[g.p.mode]; } },
@@ -2052,7 +2072,7 @@ defineGame('regras',{
     else {
       g.spr('coin',4,4); g.text(String(g.score),15,4,PAL.yellow);
       if(m==='score'||m==='tough'){ g.text('TEMPO '+Math.ceil(g.time),314,4,g.time<5?PAL.red:PAL.white,'right'); }
-      if(m==='survive'){ g.text('VIDA',196,4,PAL.white); g.rect(232,5,82,7,PAL.dgray); g.rect(233,6,80*g.hp/100,5,g.hp<30?PAL.red:g.hp<60?PAL.orange:PAL.lime);
+      if(m==='survive'){ g.text('HP',210,4,PAL.white); g.rect(232,5,82,7,PAL.dgray); g.rect(233,6,80*g.hp/100,5,g.hp<30?PAL.red:g.hp<60?PAL.orange:PAL.lime);
         if(g.hp<30){ ctx.fillStyle=`rgba(177,62,83,${(0.15+0.15*Math.sin(g.t*11)).toFixed(3)})`; ctx.fillRect(0,16,W,3); ctx.fillRect(0,H-3,W,3); ctx.fillRect(0,16,3,H); ctx.fillRect(W-3,16,3,H); } }
     }
     if(g.state==='over'){ g.rect(70,62,180,56,'rgba(14,15,24,.9)'); g.text(m==='survive'?'GAME OVER':'FIM!',160,72,PAL.yellow,'center'); g.text(g.score+' PONTOS',160,88,PAL.white,'center'); g.text('ESPAÇO: DE NOVO',160,104,PAL.lgray,'center'); }
